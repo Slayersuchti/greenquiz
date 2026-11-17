@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10251c">
+<title>GreenQuiz – Cannabis: Wissen statt Mythen</title>
+<style>
+:root{--bg:#0b1712;--panel:#14271e;--panel2:#1b3528;--green:#8de0a6;--lime:#c6f36a;--muted:#a9bdb0;--white:#f4f8f4;--red:#ff7777;--yellow:#ffd36a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#1c3b2a 0,#0b1712 55%);color:var(--white);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+header{max-width:1100px;margin:auto;padding:22px 22px 8px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.logo{font-size:1.35rem;font-weight:900;letter-spacing:-.04em}.logo span{color:var(--lime)}.tag{font-size:.78rem;color:var(--muted);border:1px solid #365443;border-radius:99px;padding:6px 10px}
+main{max-width:1000px;margin:24px auto;padding:0 20px 60px}.hero{padding:36px 0 25px}.eyebrow{color:var(--lime);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;font-weight:800}
+h1{font-size:clamp(2.4rem,7vw,5rem);line-height:.98;letter-spacing:-.06em;margin:12px 0 18px;max-width:800px}h1 em{color:var(--green);font-style:normal}.lead{max-width:650px;color:#c4d3c8;font-size:1.08rem}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}.card{background:linear-gradient(145deg,#1a3326,#12231b);border:1px solid #34513f;border-radius:22px;padding:24px;box-shadow:0 15px 45px #0002}.card h2{margin:0 0 8px;font-size:1.35rem}.card p{color:var(--muted);margin:0 0 18px}.card .emoji{font-size:2rem;margin-bottom:12px}.btn{border:0;border-radius:13px;padding:13px 18px;font-weight:800;cursor:pointer;background:var(--lime);color:#142317;font-size:1rem;transition:.15s}.btn:hover{transform:translateY(-2px);filter:brightness(1.05)}.btn.secondary{background:#294936;color:var(--white);border:1px solid #466b52}.btn.ghost{background:transparent;color:var(--green);border:1px solid #50765b}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+input,select{width:100%;padding:13px 14px;border-radius:12px;border:1px solid #46624e;background:#0d1c14;color:white;font:inherit;margin:6px 0 14px;outline:none}input:focus{border-color:var(--lime)}label{font-size:.88rem;color:#c6d7ca;font-weight:700}
+.actions{display:flex;gap:10px;flex-wrap:wrap}.hidden{display:none!important}.screen{max-width:760px;margin:22px auto}.topline{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.9rem;margin-bottom:12px}.progress{height:8px;background:#294334;border-radius:99px;overflow:hidden;margin:10px 0 22px}.bar{height:100%;width:0;background:var(--lime);transition:width .25s}.question{font-size:clamp(1.35rem,4vw,2rem);line-height:1.2;margin:10px 0 22px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}.answer{min-height:74px;text-align:left;background:#203c2c;color:white;border:1px solid #45634e;border-radius:15px;padding:16px;font-weight:700;font-size:1rem;cursor:pointer}.answer:hover{border-color:var(--lime);background:#294a35}.answer.correct{background:#214c31;border:2px solid var(--green)}.answer.wrong{background:#512b2b;border:2px solid var(--red)}.answer:disabled{cursor:default;opacity:1}.feedback{margin:18px 0;padding:16px;border-radius:14px;background:#20382a;color:#d7e7da}.feedback strong{color:var(--lime)}.small{color:var(--muted);font-size:.86rem}.score{font-size:3rem;font-weight:900;color:var(--lime);line-height:1}.rank{display:flex;justify-content:space-between;padding:12px 14px;border-radius:12px;background:#1c3325;margin:8px 0}.rank.me{outline:1px solid var(--lime)}.roomcode{font-size:2.6rem;font-weight:950;letter-spacing:.18em;color:var(--lime);text-align:center;padding:12px}.notice{padding:12px 14px;border-radius:12px;background:#263b2c;color:#d7e7da;margin:12px 0}.notice.warn{background:#493b20;color:#ffe4a3}.footer{border-top:1px solid #2b4334;margin-top:35px;padding-top:18px;color:#82998a;font-size:.82rem}
+@media(max-width:650px){.grid,.answers{grid-template-columns:1fr}header{padding:18px}.hero{padding-top:20px}.card{padding:20px}.roomcode{font-size:2rem}}
+</style>
+</head>
+<body>
+<header><div class="logo">🌿 Green<span>Quiz</span></div><div class="tag">Wissen statt Mythen · Schulprojekt 2026</div></header>
+<main>
+<section id="home">
+ <div class="hero"><div class="eyebrow">Cannabis · Medizin · Gesellschaft</div><h1>Wie viel weißt du<br>über <em>Cannabis?</em></h1><p class="lead">Teste dein Wissen rund um medizinische Nutzung, THC und CBD, Rauschnutzung, Jugendschutz und das Cannabisgesetz. Spiele allein oder fordere deine Klasse heraus.</p></div>
+ <div class="grid">
+  <article class="card"><div class="emoji">🎯</div><h2>Einzelspieler</h2><p>Beantworte Fragen in deinem Tempo, sammle Punkte und erfahre direkt, warum eine Antwort richtig ist.</p><button class="btn" onclick="startSolo()">Allein spielen</button></article>
+  <article class="card"><div class="emoji">⚡</div><h2>Multiplayer</h2><p>Erstelle einen Raum oder tritt mit einem Code bei. Wer weiß am meisten?</p><button class="btn" onclick="show('multi')">Raum öffnen</button></article>
+  <article class="card"><div class="emoji">🧠</div><h2>Themen</h2><p>Von Cannabinoiden bis zur Gehirnentwicklung – die Fragen orientieren sich an deiner Präsentation.</p><button class="btn secondary" onclick="show('topics')">Themen ansehen</button></article>
+  <article class="card"><div class="emoji">📚</div><h2>Fair & sachlich</h2><p>Das Quiz informiert. Es wirbt nicht für Konsum und stellt medizinische Behandlung nicht mit Freizeitkonsum gleich.</p><button class="btn secondary" onclick="show('about')">Über das Quiz</button></article>
+ </div>
+ <p class="small" style="margin-top:18px">Für die Online-Räume muss der Betreiber einmalig Firebase einrichten (Anleitung liegt bei). Ohne Einrichtung funktioniert der Einzelspieler sofort.</p>
+</section>
+
+<section id="topics" class="screen hidden">
+ <button class="btn ghost" onclick="show('home')">← Zurück</button><h2>Das kommt im Quiz vor</h2>
+ <div class="card"><p>🌱 Pflanze & Cannabinoide · 🧪 THC und CBD · 🩺 Medizinische Anwendung · ⚖️ CanG und Rechtslage · 🧠 Gehirnentwicklung und Jugendschutz · 📊 Reformziele und Evaluation · 💬 Medizin oder Genussmittel?</p></div>
+</section>
+<section id="about" class="screen hidden">
+ <button class="btn ghost" onclick="show('home')">← Zurück</button><h2>Über GreenQuiz</h2>
+ <div class="card"><p>Dieses Quiz wurde passend zur Schulpräsentation „Cannabis – Zwischen Medizin, Legalisierung und Risiko“ erstellt. Es behandelt die Inhalte sachlich und altersgerecht.</p><p class="small">Hinweis: Die Fragen geben den Stand und die Aussagen der Präsentation wieder. Bei Rechtsfragen ist immer die aktuell geltende Gesetzesfassung maßgeblich. Das Quiz ersetzt keine medizinische Beratung.</p></div>
+</section>
+<section id="multi" class="screen hidden">
+ <button class="btn ghost" onclick="show('home')">← Zurück</button><h2>Multiplayer-Lobby</h2>
+ <div class="card">
+  <div id="firebaseWarning" class="notice warn">Online-Multiplayer ist noch nicht verbunden. Trage zuerst deine Firebase-Konfiguration in der Datei <b>index.html</b> ein – die Anleitung erklärt es Schritt für Schritt.</div>
+  <label>Dein Spielername</label><input id="playerName" maxlength="16" placeholder="z. B. Alex">
+  <div class="grid" style="margin-top:0">
+   <div><button class="btn" style="width:100%" onclick="createRoom()">Raum erstellen</button></div>
+   <div><label>Raumcode</label><input id="joinCode" maxlength="5" placeholder="ABCDE" style="text-transform:uppercase"><button class="btn secondary" style="width:100%" onclick="joinRoom()">Beitreten</button></div>
+  </div>
+  <p id="multiMsg" class="small"></p>
+ </div>
+</section>
+<section id="lobby" class="screen hidden">
+ <button class="btn ghost" onclick="leaveRoom()">Raum verlassen</button><div class="card"><div class="eyebrow">Dein Spielraum</div><div class="roomcode" id="roomCodeDisplay">-----</div><p style="text-align:center">Teile diesen Code mit deinen Mitspielern.</p><h3>Spieler im Raum</h3><div id="players"></div><p id="hostStatus" class="small"></p><button id="startGameBtn" class="btn" onclick="hostStart()" disabled>Quiz starten</button></div>
+</section>
+<section id="game" class="screen hidden">
+ <div class="topline"><span id="modeLabel">Einzelspieler</span><span id="counter">Frage 1/10</span><span id="points">0 Punkte</span></div><div class="progress"><div id="progressBar" class="bar"></div></div>
+ <div class="card"><div class="eyebrow" id="category">WISSENSCHECK</div><div class="question" id="question"></div><div class="answers" id="answers"></div><div id="feedback" class="feedback hidden"></div><div class="actions" style="margin-top:18px"><button id="nextBtn" class="btn hidden" onclick="nextQuestion()">Weiter →</button></div></div>
+</section>
+<section id="results" class="screen hidden">
+ <div class="card"><div class="eyebrow">RUNDE BEENDET</div><h2 id="resultTitle">Stark gespielt!</h2><div class="score" id="finalScore">0</div><p class="small">Punkte</p><p id="resultText"></p><div id="leaderboard"></div><div class="actions"><button class="btn" onclick="startSolo()">Nochmal spielen</button><button class="btn secondary" onclick="show('home')">Startseite</button></div></div>
+</section>
+</main>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, set, get, update, onValue, runTransaction, remove, onDisconnect } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+// Firebase-Konfiguration aus der Anleitung hier eintragen:
+const firebaseConfig = {
+  apiKey: "HIER_EINTRAGEN",
+  authDomain: "HIER_EINTRAGEN",
+  databaseURL: "HIER_EINTRAGEN",
+  projectId: "HIER_EINTRAGEN",
+  appId: "HIER_EINTRAGEN"
+};
+let db=null, auth=null, uid=null, roomId=null, isHost=false, roomUnsub=null, roomData=null, currentGame=[];
+const configured = Object.values(firebaseConfig).every(v=>v && !v.includes("HIER_EINTRAGEN"));
+if(configured){
+ try { const app=initializeApp(firebaseConfig); db=getDatabase(app); auth=getAuth(app); const cred=await signInAnonymously(auth); uid=cred.user.uid; document.getElementById('firebaseWarning').classList.add('hidden'); }
+ catch(e){document.getElementById('firebaseWarning').textContent='Firebase-Verbindung fehlgeschlagen: '+e.message;}
+}
+const bank = [
+{c:"THC & CBD",q:"Welcher der beiden Hauptwirkstoffe ist vor allem für die berauschende Wirkung verantwortlich?",a:["CBD","THC","Beide gleich stark","Keiner"],k:1,e:"THC ist psychoaktiv und beeinflusst unter anderem Wahrnehmung, Zeitgefühl, Gedächtnis und Reaktionszeit."},
+{c:"THC & CBD",q:"Welche Aussage zu CBD passt zur Präsentation?",a:["CBD löst typischerweise einen starken Rausch aus","CBD ist nicht berauschend","CBD ist dasselbe wie THC","CBD kommt nicht in Cannabis vor"],k:1,e:"CBD löst keinen typischen Rauschzustand aus. Es wird für bestimmte medizinische Anwendungen untersucht bzw. eingesetzt."},
+{c:"THC & CBD",q:"An welche Rezeptoren bindet THC laut Präsentation vor allem im zentralen Nervensystem?",a:["CB1-Rezeptoren","Insulinrezeptoren","Dopamin-D4 ausschließlich","Keine Rezeptoren"],k:0,e:"Die Präsentation beschreibt die Bindung von THC vor allem an CB1-Rezeptoren im zentralen Nervensystem."},
+{c:"Pflanze",q:"Wie viele Cannabinoide enthält die Cannabispflanze laut Präsentation ungefähr?",a:["Über 100","Genau 2","Weniger als 5","Über 10.000"],k:0,e:"Neben THC und CBD enthält die Pflanze laut Präsentation über 100 Cannabinoide."},
+{c:"Pflanze",q:"Wovon kann die Wirkung von Cannabis abhängen?",a:["Nur von der Farbe der Pflanze","Wirkstoffkonzentration und individueller Disposition","Nur vom Alter der Pflanze","Ausschließlich von der Tageszeit"],k:1,e:"Die Präsentation nennt unter anderem Wirkstoffkonzentration, Dosis, Konsumform und individuelle Disposition."},
+{c:"Medizin",q:"In welchem Jahr wurde in Deutschland Cannabis als Medizin auf Rezept ermöglicht?",a:["1990","2005","2017","2024"],k:2,e:"Die Präsentation nennt März 2017 als wichtigen Schritt für die Verschreibung bei schwerwiegenden Erkrankungen."},
+{c:"Medizin",q:"Was unterscheidet medizinische Anwendung laut Präsentation vom Freizeitkonsum?",a:["Ärztliche Indikation und Verlaufskontrolle","Medizinisches Cannabis wirkt immer stärker","Es gibt keine Unterschiede","Freizeitkonsum braucht ein Rezept"],k:0,e:"Medizinische Behandlung erfolgt mit ärztlicher Indikation, Verordnung, Dosisanpassung und Beobachtung möglicher Nebenwirkungen."},
+{c:"Medizin",q:"Welche Erkrankung bzw. welches Symptomfeld nennt die Präsentation als mögliches medizinisches Einsatzgebiet?",a:["Kurzsichtigkeit","Spastik bei bestimmten Erkrankungen","Erkältung grundsätzlich","Alle Schlafprobleme"],k:1,e:"Die Präsentation nennt unter anderem Spastik, bestimmte Epilepsieformen, schwere chronische Schmerzen und palliative Versorgung."},
+{c:"Medizin",q:"Warum ist die medizinische Qualität laut Präsentation besonders kontrolliert?",a:["Damit die Verpackung schöner aussieht","Apothekenstandard, definierter Wirkstoffgehalt und mikrobiologische Kontrolle","Damit es schneller berauscht","Damit es ohne ärztliche Begleitung genutzt wird"],k:1,e:"Medizinische Produkte unterliegen Qualitätsstandards und werden ärztlich begleitet."},
+{c:"Recht",q:"Wann trat das Cannabisgesetz (CanG) laut Präsentation in Kraft?",a:["April 2024","Januar 2017","Mai 2020","April 2026"],k:0,e:"Die Präsentation nennt April 2024 als Inkrafttreten des CanG."},
+{c:"Recht",q:"Welche Aussage zur Altersgrenze gibt die Präsentation wieder?",a:["Besitz ist ab 16 erlaubt","Erwerb und Besitz sind unter 18 verboten","Für Minderjährige gelten dieselben Regeln wie für Erwachsene","Nur der Anbau ist unter 18 verboten"],k:1,e:"Laut Präsentation bleiben Erwerb, Besitz und Anbau für Minderjährige verboten."},
+{c:"Recht",q:"Wie viel Cannabis dürfen Erwachsene laut Präsentation im öffentlichen Raum höchstens mitführen?",a:["5 g","10 g","25 g","50 g"],k:2,e:"Die Präsentation nennt 25 Gramm als erlaubte Höchstmenge unterwegs für Erwachsene."},
+{c:"Recht",q:"Welche Menge nennt die Präsentation als Obergrenze am Wohnsitz für Erwachsene?",a:["15 g","25 g","50 g","100 g"],k:2,e:"Die Folie zu gesetzlichen Grenzwerten nennt maximal 50 Gramm am Wohnsitz."},
+{c:"Recht",q:"Wie viele Pflanzen nennt die Präsentation als erlaubte Obergrenze für den Eigenanbau pro erwachsener Person?",a:["1","2","3","5"],k:2,e:"Die Präsentation nennt bis zu drei Pflanzen pro erwachsener Person."},
+{c:"Jugendschutz",q:"Bis ungefähr zu welchem Alter befindet sich das Gehirn laut Präsentation noch in wichtigen Reifungsprozessen?",a:["12 Jahren","16 Jahren","18 Jahren","25 Jahren"],k:3,e:"Die Präsentation beschreibt wichtige Reifungsprozesse bis etwa zum 25. Lebensjahr."},
+{c:"Jugendschutz",q:"Welche Fähigkeiten ordnet die Präsentation dem präfrontalen Kortex zu?",a:["Impulskontrolle und Abwägen von Risiken","Verdauung und Atmung","Nur das Hören","Steuerung der Haarfarbe"],k:0,e:"Der präfrontale Kortex ist unter anderem an Impulskontrolle, Risikobewertung und logischem Denken beteiligt."},
+{c:"Jugendschutz",q:"Welches Risiko wird in der Präsentation bei häufigem Cannabiskonsum im Jugendalter angesprochen?",a:["Verbesserte Gedächtnisleistung","Gedächtnisdefizite und mögliche psychische Belastungen","Garantiert bessere Konzentration","Keine möglichen Auswirkungen"],k:1,e:"Die Präsentation nennt mögliche Gedächtnisdefizite und affektive Störungen sowie ein erhöhtes Psychoserisiko bei entsprechender Veranlagung."},
+{c:"Jugendschutz",q:"Warum ist Jugendschutz bei Cannabis ein wichtiges Thema?",a:["Weil Jugendliche grundsätzlich keine Fragen stellen dürfen","Weil sich das Gehirn noch entwickelt und Risiken bestehen","Weil Cannabis nur bei Jugendlichen wirkt","Weil Prävention unnötig ist"],k:1,e:"Die Präsentation betont die Entwicklung des Gehirns und die besondere gesundheitliche Verwundbarkeit Heranwachsender."},
+{c:"Risiken",q:"Welche akute Reaktion wird in der Präsentation als mögliches Risiko von THC genannt?",a:["Akute Angstzustände","Garantierte Euphorie ohne Nebenwirkungen","Sofortige Heilung","Bessere Reaktionszeit"],k:0,e:"Die Präsentation nennt unter anderem akute Angstzustände und Kreislaufdysregulation als mögliche Risiken."},
+{c:"Risiken",q:"Was kann laut Präsentation bei entsprechender Veranlagung begünstigt werden?",a:["Psychotische Episoden","Bessere Sehschärfe","Schnelleres Wachstum","Immunität gegen Stress"],k:0,e:"Die Präsentation weist auf ein erhöhtes Risiko psychotischer Episoden bei entsprechender Vulnerabilität hin."},
+{c:"Gesellschaft",q:"Was ist ein Ziel der wissenschaftlichen Begleitforschung zum CanG?",a:["Nur die Zahl der Pflanzen zu zählen","Auswirkungen auf Jugendkonsum, Schwarzmarktpreise und Krankenhausbehandlungen prüfen","Cannabis zu bewerben","Alle Nebenwirkungen auszuschließen"],k:1,e:"Die Präsentation nennt diese Bereiche als Gegenstand einer mehrjährigen Evaluation."},
+{c:"Gesellschaft",q:"Warum sollte man aus einer zeitlichen Veränderung nicht automatisch auf eine Ursache schließen?",a:["Weil Zahlen immer falsch sind","Weil Korrelation nicht automatisch Kausalität beweist","Weil Forschung keine Daten nutzt","Weil Gesetze nie Auswirkungen haben"],k:1,e:"Die Präsentation betont wissenschaftliche Redlichkeit: Korrelationen dürfen nicht vorschnell als Kausalität gedeutet werden."},
+{c:"Medizin oder Genuss?",q:"Was ist bei medizinischer Anwendung typisch?",a:["Ärztliche Verordnung und Beobachtung","Keine Qualitätskontrolle","Konsum ohne therapeutisches Ziel","Werbung als Lifestyle-Produkt"],k:0,e:"Die Präsentation stellt ärztliche Indikation, Apothekenstandard und Verlaufskontrolle dem Freizeitkonsum gegenüber."},
+{c:"Medizin oder Genuss?",q:"Was beschreibt Freizeitkonsum in der Gegenüberstellung der Präsentation?",a:["Therapeutisches Behandlungsziel","Rauschwirkung ohne therapeutische Zielsetzung","Immer eine ärztliche Verordnung","Eine Behandlung in der Apotheke"],k:1,e:"Die Präsentation beschreibt Freizeitkonsum als persönliche Konsumentscheidung Volljähriger ohne therapeutische Zielsetzung."},
+{c:"Recht",q:"Welche Aussage zu Anbauvereinigungen steht im Zusammenhang mit dem CanG in der Präsentation?",a:["Sie sind auf kommerziellen Verkauf ausgelegt","Sie sind nicht-kommerziell","Sie dürfen an Minderjährige abgeben","Sie ersetzen Arztpraxen"],k:1,e:"Die Präsentation beschreibt Anbauvereinigungen als nicht-kommerziell."},
+{c:"Risiken",q:"Warum ist die Aussage „Cannabis wirkt bei allen gleich“ falsch?",a:["Die Wirkung hängt von mehreren Faktoren ab","Alle Menschen haben dieselbe Reaktion","Nur die Verpackung entscheidet","Die Pflanze enthält nur einen Wirkstoff"],k:0,e:"Wirkstoffgehalt, Dosis, Konsumform und individuelle Faktoren beeinflussen Wirkung und Verlauf."},
+{c:"Prävention",q:"Was ist ein sinnvoller Ansatz der Prävention?",a:["Risiken verschweigen","Sachlich informieren und frühzeitig Beratung ermöglichen","Konsum verharmlosen","Medizinische Nutzung und Freizeitkonsum gleichsetzen"],k:1,e:"Die Präsentation hebt Prävention und frühe Beratung als Teil des Jugendschutzes hervor."},
+{c:"Recht",q:"Wo ist der Konsum laut Präsentation unter anderem verboten?",a:["Im Sichtbereich von Schulen und Spielplätzen","Überall im eigenen Zuhause","In jedem Park ohne Ausnahme","Nur in Apotheken"],k:0,e:"Die Präsentation nennt unter anderem Sichtbereiche von Schulen, Kitas, Spielplätzen und Jugendeinrichtungen als Verbotszonen."},
+{c:"Geschichte",q:"Welcher Schritt kam zuerst?",a:["CanG 2024","Cannabis als Medizin auf Rezept 2017","Beides gleichzeitig","Die Präsentation nennt kein Datum"],k:1,e:"Die medizinische Reform von 2017 ging dem CanG von 2024 voraus."}
+];
+let soloQuestions=[], index=0, score=0, answered=false, multiplayer=false, myAnswers={};
+const $=id=>document.getElementById(id);
+window.show=(id)=>{document.querySelectorAll('main>section').forEach(s=>s.classList.add('hidden'));$(id).classList.remove('hidden')};
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+window.startSolo=()=>{multiplayer=false;soloQuestions=shuffle(bank).slice(0,12);index=0;score=0;show('game');renderQuestion()};
+function renderQuestion(){
+ const q=soloQuestions[index];answered=false;$('modeLabel').textContent=multiplayer?'Multiplayer':'Einzelspieler';$('counter').textContent=`Frage ${index+1}/${soloQuestions.length}`;$('points').textContent=score+' Punkte';$('progressBar').style.width=(index/soloQuestions.length*100)+'%';$('category').textContent=q.c.toUpperCase();$('question').textContent=q.q;$('feedback').classList.add('hidden');$('nextBtn').classList.add('hidden');$('answers').innerHTML='';
+ q.a.forEach((a,i)=>{const b=document.createElement('button');b.className='answer';b.textContent=['🟩','🟦','🟨','🟥'][i]+'  '+a;b.onclick=()=>answer(i,b);$('answers').appendChild(b)});
+}
+function answer(choice,btn){
+ if(answered)return;answered=true;const q=soloQuestions[index];const buttons=[...$('answers').children];buttons.forEach((b,i)=>{b.disabled=true;if(i===q.k)b.classList.add('correct');if(i===choice&&i!==q.k)b.classList.add('wrong')});
+ const correct=choice===q.k;if(correct)score+=100+Math.max(0,Math.round((12-index)*3));$('points').textContent=score+' Punkte';$('feedback').innerHTML=`<strong>${correct?'Richtig! + Punkte':'Nicht ganz.'}</strong><br>${q.e}`;$('feedback').classList.remove('hidden');$('nextBtn').classList.remove('hidden');
+}
+window.nextQuestion=()=>{if(index<soloQuestions.length-1){index++;renderQuestion()}else finishSolo()};
+function finishSolo(){$('progressBar').style.width='100%';$('finalScore').textContent=score;$('resultTitle').textContent=score>=1000?'Starkes Wissen!':score>=600?'Gut gemacht!':'Gute Übung!';$('resultText').textContent=`Du hast ${soloQuestions.length} Fragen gespielt. Lies dir die Erklärungen durch und probiere es gern erneut.`;$('leaderboard').innerHTML='';show('results')}
+
+function makeCode(){return Math.random().toString(36).slice(2,7).toUpperCase()}
+window.createRoom=async()=>{
+ if(!db||!uid){$('multiMsg').textContent='Firebase ist noch nicht eingerichtet. Bitte die Anleitung öffnen und die Konfiguration ergänzen.';return}
+ const name=$('playerName').value.trim().slice(0,16)||'Spieler';roomId=makeCode();isHost=true;
+ await set(ref(db,`rooms/${roomId}`),{host:uid,status:'lobby',createdAt:Date.now(),players:{[uid]:{name,score:0,joinedAt:Date.now()}}});
+ await onDisconnect(ref(db,`rooms/${roomId}/players/${uid}`)).remove();listenRoom();show('lobby');
+};
+window.joinRoom=async()=>{
+ if(!db||!uid){$('multiMsg').textContent='Firebase ist noch nicht eingerichtet. Bitte die Konfiguration ergänzen.';return}
+ const code=$('joinCode').value.trim().toUpperCase();const name=$('playerName').value.trim().slice(0,16)||'Spieler';
+ if(!code){$('multiMsg').textContent='Bitte einen Raumcode eingeben.';return}
+ const snap=await get(ref(db,`rooms/${code}`));if(!snap.exists()||snap.val().status!=='lobby'){$('multiMsg').textContent='Raum nicht gefunden oder Spiel läuft bereits.';return}
+ roomId=code;isHost=false;await set(ref(db,`rooms/${roomId}/players/${uid}`),{name,score:0,joinedAt:Date.now()});await onDisconnect(ref(db,`rooms/${roomId}/players/${uid}`)).remove();listenRoom();show('lobby');
+};
+function listenRoom(){
+ if(roomUnsub)roomUnsub();roomUnsub=onValue(ref(db,`rooms/${roomId}`),snap=>{if(!snap.exists()){leaveRoom();return}roomData=snap.val();renderLobby();if(roomData.status==='playing'&&!multiplayer){multiplayer=true;currentGame=roomData.questions||[];index=0;myAnswers={};show('game');renderOnlineQuestion()}});
+}
+function renderLobby(){
+ $('roomCodeDisplay').textContent=roomId;$('players').innerHTML='';const ps=roomData.players||{};
+ Object.entries(ps).forEach(([id,p])=>{const d=document.createElement('div');d.className='rank';d.textContent=(id===roomData.host?'👑 ':'👤 ')+p.name;$('players').appendChild(d)});
+ $('hostStatus').textContent=isHost?'Du bist Host und kannst das Spiel starten.':'Warte, bis der Host das Quiz startet.';$('startGameBtn').disabled=!isHost||Object.keys(ps).length<1;
+}
+window.hostStart=async()=>{
+ if(!isHost||!roomData)return;const qs=shuffle(bank).slice(0,10).map(q=>({...q,correct:q.k,options:shuffle(q.a.map((a,i)=>({a,correct:i===q.k})))}));
+ await update(ref(db,`rooms/${roomId}`),{status:'playing',questions:qs,startedAt:Date.now()});
+};
+function renderOnlineQuestion(){
+ const q=currentGame[index];if(!q){showOnlineResults();return}
+ $('modeLabel').textContent='Multiplayer · Raum '+roomId;$('counter').textContent=`Frage ${index+1}/${currentGame.length}`;$('points').textContent='Live-Spiel';$('progressBar').style.width=(index/currentGame.length*100)+'%';$('category').textContent=q.c.toUpperCase();$('question').textContent=q.q;$('feedback').classList.add('hidden');$('nextBtn').classList.add('hidden');$('answers').innerHTML='';
+ q.options.forEach((o,i)=>{const b=document.createElement('button');b.className='answer';b.textContent=['🟩','🟦','🟨','🟥'][i]+'  '+o.a;b.onclick=()=>submitOnline(i);$('answers').appendChild(b)});
+}
+async function submitOnline(i){
+ if(myAnswers[index]!==undefined)return;const q=currentGame[index];const correct=q.options[i].correct;myAnswers[index]=i;const add=correct?100:0;
+ await runTransaction(ref(db,`rooms/${roomId}/players/${uid}/score`),v=>(v||0)+add);
+ await set(ref(db,`rooms/${roomId}/answers/${uid}/${index}`),{choice:i,correct});
+ [...$('answers').children].forEach((b,j)=>{b.disabled=true;if(q.options[j].correct)b.classList.add('correct');if(j===i&&!correct)b.classList.add('wrong')});
+ $('feedback').textContent=correct?'Richtig! +100 Punkte':'Leider falsch – nächste Frage kommt gleich.';$('feedback').classList.remove('hidden');
+ setTimeout(async()=>{if(index<currentGame.length-1){index++;renderOnlineQuestion()}else showOnlineResults()},1800);
+}
+async function showOnlineResults(){
+ $('progressBar').style.width='100%';const snap=await get(ref(db,`rooms/${roomId}/players`));const ps=Object.entries(snap.val()||{}).sort((a,b)=>(b[1].score||0)-(a[1].score||0));$('finalScore').textContent=(snap.val()?.[uid]?.score||0);$('resultTitle').textContent='Multiplayer-Ergebnis';$('resultText').textContent='Rangliste des Raums '+roomId;$('leaderboard').innerHTML='';
+ ps.forEach(([id,p],i)=>{const d=document.createElement('div');d.className='rank'+(id===uid?' me':'');d.textContent=`${i+1}. ${p.name} — ${p.score||0} Punkte`;$('leaderboard').appendChild(d)});show('results');
+}
+window.leaveRoom=async()=>{if(roomUnsub)roomUnsub();if(db&&roomId&&uid){await remove(ref(db,`rooms/${roomId}/players/${uid}`)).catch(()=>{});if(isHost)await update(ref(db,`rooms/${roomId}`),{status:'finished'}).catch(()=>{})}roomId=null;isHost=false;multiplayer=false;show('home')};
+</script>
+</body></html>
